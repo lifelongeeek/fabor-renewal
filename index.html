@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FABOR | 일상을 담는 오브제</title>
+<meta name="description" content="FABOR - 일상을 담는 오브제. 한국의 미학과 현대적 감각이 만나는 디자인 오브제 브랜드.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#DDDBD6;
+  --bg-dark:#1a1a1a;
+  --text:#1a1a1a;
+  --text-light:#DDDBD6;
+  --accent:#C45A3C;
+  --accent-hover:#a84830;
+  --font-display:'Instrument Sans',sans-serif;
+  --font-body:'Noto Sans KR',sans-serif;
+  --font-mono:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--accent) var(--bg)}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* ===== LOADER ===== */
+.loader{position:fixed;inset:0;z-index:9999;background:var(--bg-dark);display:flex;align-items:center;justify-content:center;transition:opacity .8s ease,visibility .8s ease}
+.loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-text{font-family:var(--font-display);font-size:clamp(2rem,5vw,4rem);color:var(--text-light);letter-spacing:.3em;font-weight:700}
+.loader-text span{display:inline-block;opacity:0;transform:translateY(30px)}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference}
+nav *{color:#fff!important}
+.nav-logo{font-family:var(--font-display);font-size:1.4rem;font-weight:700;letter-spacing:.15em;text-decoration:none;cursor:pointer}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-size:.75rem;text-decoration:none;letter-spacing:.1em;text-transform:uppercase;position:relative;cursor:pointer}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:currentColor;transition:width .3s ease}
+.nav-links a:hover::after{width:100%}
+
+/* ===== SECTIONS COMMON ===== */
+section{min-height:100vh;position:relative;overflow:hidden}
+
+/* ===== HERO ===== */
+.hero{display:flex;align-items:center;justify-content:center;position:relative;height:100vh}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.1)}
+.hero-overlay{position:absolute;inset:0;background:rgba(26,26,26,.35);z-index:1}
+.hero-content{position:relative;z-index:2;text-align:center;color:var(--text-light)}
+.hero-title{font-family:var(--font-display);font-size:clamp(5rem,18vw,16rem);font-weight:700;letter-spacing:.08em;line-height:.85;will-change:transform,opacity}
+.hero-subtitle{font-family:var(--font-body);font-size:clamp(1rem,2vw,1.5rem);margin-top:2rem;letter-spacing:.2em;font-weight:300;opacity:0;transform:translateY(20px)}
+.hero-scroll{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);z-index:2;color:var(--text-light);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.hero-scroll .line{width:1px;height:40px;background:var(--text-light);animation:scrollLine 2s ease infinite}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ===== ABOUT ===== */
+.about{display:flex;align-items:center;justify-content:center;padding:10vh 8vw;background:var(--bg)}
+.about-inner{max-width:1200px;width:100%}
+.about-label{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:3rem;display:flex;align-items:center;gap:1rem}
+.about-label::before{content:'';width:40px;height:1px;background:var(--accent)}
+.about-text{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,4.2rem);line-height:1.4;font-weight:500}
+.about-text .word{display:inline-block;overflow:hidden;margin-right:.3em;vertical-align:top}
+.about-text .word-inner{display:inline-block;transform:translateY(110%);opacity:0;will-change:transform,opacity}
+.about-text .line-break{display:block;margin-top:.2em}
+.about-kr{font-family:var(--font-body);font-weight:400}
+
+/* ===== PHILOSOPHY ===== */
+.philosophy{display:flex;min-height:200vh;position:relative}
+.philosophy-text{flex:1;display:flex;flex-direction:column;justify-content:center;padding:10vh 6vw;position:relative;z-index:2}
+.philosophy-heading{font-family:var(--font-display);font-size:clamp(3rem,7vw,7rem);font-weight:700;line-height:.95;letter-spacing:-.02em;color:var(--text)}
+.philosophy-heading span{display:block;overflow:hidden}
+.philosophy-heading .word-inner{display:block;transform:translateY(100%);will-change:transform}
+.philosophy-desc{font-family:var(--font-body);font-size:clamp(.95rem,1.3vw,1.15rem);line-height:1.9;margin-top:3rem;max-width:480px;font-weight:300;color:#555}
+.philosophy-image{flex:1;position:sticky;top:0;height:100vh;overflow:hidden}
+.philosophy-image img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);will-change:transform}
+.philosophy-num{font-family:var(--font-mono);font-size:.75rem;color:var(--accent);letter-spacing:.15em;margin-bottom:1.5rem}
+
+/* ===== PRODUCTS (HORIZONTAL SCROLL) ===== */
+.products{overflow:hidden;background:var(--bg-dark);color:var(--text-light)}
+.products-inner{padding:8vh 0}
+.products-header{padding:0 6vw 6vh;display:flex;justify-content:space-between;align-items:flex-end}
+.products-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,4.5rem);font-weight:700;letter-spacing:-.02em}
+.products-count{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.15em;color:var(--accent)}
+.products-track{display:flex;gap:3vw;padding:0 6vw;will-change:transform}
+.product-card{flex-shrink:0;width:clamp(280px,28vw,420px)}
+.product-card-img{width:100%;aspect-ratio:3/4;overflow:hidden;border-radius:4px;position:relative}
+.product-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.product-card:hover .product-card-img img{transform:scale(1.05)}
+.product-card-info{padding:1.5rem 0}
+.product-card-num{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.5rem}
+.product-card-name{font-family:var(--font-display);font-size:clamp(1.1rem,1.5vw,1.4rem);font-weight:600;letter-spacing:.02em}
+.product-card-desc{font-family:var(--font-body);font-size:.85rem;color:rgba(255,255,255,.5);margin-top:.4rem;font-weight:300}
+.product-card-arrow{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;cursor:pointer;transition:gap .3s ease}
+.product-card:hover .product-card-arrow{gap:1rem}
+
+/* ===== COLLECTION ===== */
+.collection{padding:15vh 6vw;background:var(--bg)}
+.collection-header{margin-bottom:8vh}
+.collection-label{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.collection-label::before{content:'';width:40px;height:1px;background:var(--accent)}
+.collection-title{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.02em}
+.collection-grid{display:grid;grid-template-columns:1fr 1fr;gap:3vw;align-items:start}
+.collection-item{overflow:hidden;border-radius:4px;position:relative}
+.collection-item:nth-child(2){margin-top:15vh}
+.collection-item img{width:100%;display:block;object-fit:cover;transform:scale(1.05);will-change:transform;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.collection-item:hover img{transform:scale(1.1)}
+.collection-item .reveal-mask{position:absolute;inset:0;background:var(--bg);will-change:transform;transform-origin:right}
+
+/* ===== VALUES ===== */
+.values{padding:15vh 6vw;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.values-big{font-family:var(--font-display);font-size:clamp(2.5rem,6.5vw,6rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:10vh;text-align:center}
+.values-big .val-word{display:inline-block;opacity:0;transform:translateY(40px);will-change:transform,opacity;margin:0 .15em}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4vw;max-width:1200px;margin:0 auto;width:100%}
+.value-item{opacity:0;transform:translateY(30px)}
+.value-item-num{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);letter-spacing:.15em;margin-bottom:1rem}
+.value-item-title-en{font-family:var(--font-display);font-size:1.6rem;font-weight:700;letter-spacing:-.01em}
+.value-item-title-kr{font-family:var(--font-body);font-size:1rem;font-weight:500;color:var(--accent);margin-top:.3rem;margin-bottom:1rem}
+.value-item-desc{font-family:var(--font-body);font-size:.9rem;line-height:1.8;color:#666;font-weight:300}
+.value-item-line{width:30px;height:1px;background:var(--accent);margin-bottom:1.5rem}
+
+/* ===== FOOTER ===== */
+footer{background:var(--bg-dark);color:var(--text-light);padding:10vh 6vw 4vh;position:relative}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10vh;flex-wrap:wrap;gap:4rem}
+.footer-brand{font-family:var(--font-display);font-size:clamp(4rem,12vw,10rem);font-weight:700;letter-spacing:.05em;line-height:.9;opacity:.15}
+.footer-info{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem}
+.footer-col h4{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.footer-col p,.footer-col a{font-family:var(--font-body);font-size:.9rem;color:rgba(255,255,255,.6);text-decoration:none;line-height:2;display:block;transition:color .3s ease}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:3vh;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;gap:1rem}
+.footer-copy{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;color:rgba(255,255,255,.3)}
+.footer-back-top{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);cursor:pointer;text-decoration:none;transition:opacity .3s ease}
+.footer-back-top:hover{opacity:.7}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{gap:1.5rem}
+  .nav-links a{font-size:.65rem}
+  .philosophy{flex-direction:column;min-height:auto}
+  .philosophy-text{padding:8vh 6vw}
+  .philosophy-image{position:relative;height:60vh;width:100%}
+  .products-track{gap:5vw}
+  .product-card{width:75vw}
+  .collection-grid{grid-template-columns:1fr}
+  .collection-item:nth-child(2){margin-top:0}
+  .values-grid{grid-template-columns:1fr;gap:4rem}
+  .footer-info{grid-template-columns:1fr}
+  .footer-top{flex-direction:column}
+  .about{padding:10vh 6vw}
+}
+@media(max-width:480px){
+  .hero-title{font-size:clamp(3.5rem,20vw,6rem)}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-text" id="loader-text">
+    <span>F</span><span>A</span><span>B</span><span>O</span><span>R</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" onclick="scrollToSection('hero')">FABOR</a>
+  <ul class="nav-links">
+    <li><a onclick="scrollToSection('about')">About</a></li>
+    <li><a onclick="scrollToSection('products')">Collection</a></li>
+    <li><a onclick="scrollToSection('values')">Values</a></li>
+    <li><a onclick="scrollToSection('footer')">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=80" alt="FABOR Interior" loading="eager">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title" id="hero-title">FABOR</h1>
+    <p class="hero-subtitle" id="hero-subtitle">일상을 담는 오브제</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-label">(ABOUT) EST. 2024</div>
+    <div class="about-text" id="about-text">
+      <span class="word"><span class="word-inner about-kr">우리는</span></span>
+      <span class="word"><span class="word-inner about-kr">단순한</span></span>
+      <span class="word"><span class="word-inner about-kr">가구를</span></span>
+      <span class="word"><span class="word-inner about-kr">만들지</span></span>
+      <span class="word"><span class="word-inner about-kr">않습니다.</span></span>
+      <span class="line-break"></span>
+      <span class="word"><span class="word-inner about-kr">일상의</span></span>
+      <span class="word"><span class="word-inner about-kr">모든</span></span>
+      <span class="word"><span class="word-inner about-kr">순간에</span></span>
+      <span class="word"><span class="word-inner about-kr">스며드는</span></span>
+      <span class="line-break"></span>
+      <span class="word"><span class="word-inner about-kr">조용하지만</span></span>
+      <span class="word"><span class="word-inner about-kr">강한</span></span>
+      <span class="word"><span class="word-inner about-kr">아름다움을</span></span>
+      <span class="word"><span class="word-inner about-kr">만듭니다.</span></span>
+      <span class="line-break"></span>
+      <span class="line-break"></span>
+      <span class="word"><span class="word-inner">FABOR</span></span>
+      <span class="word"><span class="word-inner about-kr">는</span></span>
+      <span class="word"><span class="word-inner about-kr">한국의</span></span>
+      <span class="word"><span class="word-inner about-kr">미학과</span></span>
+      <span class="line-break"></span>
+      <span class="word"><span class="word-inner about-kr">현대적</span></span>
+      <span class="word"><span class="word-inner about-kr">감각이</span></span>
+      <span class="word"><span class="word-inner about-kr">만나는</span></span>
+      <span class="word"><span class="word-inner about-kr">지점에서</span></span>
+      <span class="line-break"></span>
+      <span class="word"><span class="word-inner about-kr">당신의</span></span>
+      <span class="word"><span class="word-inner about-kr">공간을</span></span>
+      <span class="word"><span class="word-inner about-kr">완성합니다.</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-text">
+    <div class="philosophy-num">(01) Philosophy</div>
+    <h2 class="philosophy-heading">
+      <span><span class="word-inner">QUIET</span></span>
+      <span><span class="word-inner">BUT</span></span>
+      <span><span class="word-inner">STRONG</span></span>
+    </h2>
+    <p class="philosophy-desc">
+      불필요한 장식을 걷어내고, 본질적인 아름다움만 남깁니다.
+      FABOR의 모든 제품은 공간에 자연스럽게 스며들어
+      일상에 조용한 힘을 더합니다.
+      우리는 '덜어냄'의 미학을 믿습니다.
+    </p>
+  </div>
+  <div class="philosophy-image">
+    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1000&q=80" alt="FABOR Philosophy" loading="lazy">
+  </div>
+</section>
+
+<!-- PRODUCTS HORIZONTAL SCROLL -->
+<section class="products" id="products">
+  <div class="products-inner">
+    <div class="products-header">
+      <h2 class="products-title">Selected Works</h2>
+      <span class="products-count">(4) OBJECTS</span>
+    </div>
+    <div class="products-track" id="products-track">
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80" alt="Span Tray" loading="lazy">
+        </div>
+        <div class="product-card-info">
+          <div class="product-card-num">(01)</div>
+          <div class="product-card-name">Span Tray : Pen</div>
+          <div class="product-card-desc">스팬 트레이 : 펜</div>
+          <div class="product-card-arrow">View &rarr;</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=600&q=80" alt="Shade Mobile" loading="lazy">
+        </div>
+        <div class="product-card-info">
+          <div class="product-card-num">(02)</div>
+          <div class="product-card-name">Shade Mobile</div>
+          <div class="product-card-desc">수묵화 모빌</div>
+          <div class="product-card-arrow">View &rarr;</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80" alt="Flow Shelf" loading="lazy">
+        </div>
+        <div class="product-card-info">
+          <div class="product-card-num">(03)</div>
+          <div class="product-card-name">Flow Shelf</div>
+          <div class="product-card-desc">플로우 선반</div>
+          <div class="product-card-arrow">View &rarr;</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80" alt="Calm Vase" loading="lazy">
+        </div>
+        <div class="product-card-info">
+          <div class="product-card-num">(04)</div>
+          <div class="product-card-name">Calm Vase</div>
+          <div class="product-card-desc">캄 화병</div>
+          <div class="product-card-arrow">View &rarr;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection">
+  <div class="collection-header">
+    <div class="collection-label">(02) Collection</div>
+    <h2 class="collection-title">공간을 완성하는<br>조용한 힘</h2>
+  </div>
+  <div class="collection-grid">
+    <div class="collection-item">
+      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80" alt="FABOR Collection 1" loading="lazy">
+      <div class="reveal-mask"></div>
+    </div>
+    <div class="collection-item">
+      <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=1200&q=80" alt="FABOR Collection 2" loading="lazy">
+      <div class="reveal-mask"></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values" id="values">
+  <div class="values-big" id="values-big">
+    <span class="val-word">WE</span>
+    <span class="val-word">BELIEVE</span>
+    <span class="val-word">IN</span>
+    <span class="val-word">QUIET</span>
+    <span class="val-word">BEAUTY</span>
+  </div>
+  <div class="values-grid">
+    <div class="value-item">
+      <div class="value-item-num">(01)</div>
+      <div class="value-item-line"></div>
+      <div class="value-item-title-en">Minimal</div>
+      <div class="value-item-title-kr">미니멀</div>
+      <div class="value-item-desc">불필요한 것을 덜어내고 본질에 집중합니다. 하나의 선, 하나의 면이 공간 전체를 바꿀 수 있다고 믿습니다.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-item-num">(02)</div>
+      <div class="value-item-line"></div>
+      <div class="value-item-title-en">Sustainable</div>
+      <div class="value-item-title-kr">지속가능</div>
+      <div class="value-item-desc">오래 사용할 수 있는 가치를 만듭니다. 유행을 따르지 않는 디자인으로 시간이 지나도 변하지 않는 아름다움을 추구합니다.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-item-num">(03)</div>
+      <div class="value-item-line"></div>
+      <div class="value-item-title-en">Korean Beauty</div>
+      <div class="value-item-title-kr">한국미</div>
+      <div class="value-item-desc">한국 고유의 미학을 현대적으로 해석합니다. 여백의 미와 자연스러운 곡선에서 영감을 받아 새로운 조형을 만들어갑니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="footer-brand">FABOR</div>
+    <div class="footer-info">
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:faborobjet@gmail.com">faborobjet@gmail.com</a>
+        <p>서울특별시 송파구 위례성대로2길 28</p>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <a href="https://www.instagram.com/fabor.objet/" target="_blank" rel="noopener">Instagram @fabor.objet</a>
+        <a href="https://fabor.kr" target="_blank" rel="noopener">fabor.kr</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a onclick="scrollToSection('about')" style="cursor:pointer">About</a>
+        <a onclick="scrollToSection('products')" style="cursor:pointer">Collection</a>
+        <a onclick="scrollToSection('values')" style="cursor:pointer">Values</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <p>사업자 등록번호 676-19-02582</p>
+        <p>대표 김승기</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 FABOR. All Rights Reserved.</span>
+    <a class="footer-back-top" onclick="scrollToSection('hero')">Back to Top &uarr;</a>
+  </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+// Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
+// ===== LOADER =====
+const loaderLetters = document.querySelectorAll('#loader-text span');
+let animationsInitialized = false;
+function hideLoaderAndInit() {
+  if (animationsInitialized) return;
+  animationsInitialized = true;
+  document.getElementById('loader').classList.add('hidden');
+  initAnimations();
+}
+
+gsap.to(loaderLetters, {
+  opacity: 1,
+  y: 0,
+  stagger: 0.1,
+  duration: 0.6,
+  ease: 'power3.out',
+  onComplete: () => {
+    gsap.to('#loader', {
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.5,
+      ease: 'power2.inOut',
+      onComplete: hideLoaderAndInit
+    });
+  }
+});
+
+setTimeout(hideLoaderAndInit, 4000);
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+function initAnimations() {
+
+  // ===== HERO =====
+  // Subtitle fade in
+  gsap.to('.hero-subtitle', {
+    opacity: 1,
+    y: 0,
+    duration: 1.2,
+    delay: 0.3,
+    ease: 'power3.out'
+  });
+
+  // Hero parallax on scroll
+  gsap.to('.hero-bg img', {
+    scale: 1.2,
+    y: 100,
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1
+    }
+  });
+
+  // Hero title scale and fade
+  gsap.to('.hero-title', {
+    scale: 1.3,
+    opacity: 0,
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'center center',
+      end: 'bottom top',
+      scrub: 1
+    }
+  });
+
+  gsap.to('.hero-subtitle', {
+    y: -30,
+    opacity: 0,
+    scrollTrigger: {
+      trigger: '.hero',
+      start: '60% center',
+      end: 'bottom top',
+      scrub: 1
+    }
+  });
+
+  // ===== ABOUT: Word-by-word reveal =====
+  const aboutWords = document.querySelectorAll('.about-text .word-inner');
+  gsap.to(aboutWords, {
+    y: 0,
+    opacity: 1,
+    stagger: 0.04,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.about',
+      start: 'top 70%',
+      end: 'center center',
+      scrub: 1
+    }
+  });
+
+  // ===== PHILOSOPHY =====
+  const philoWords = document.querySelectorAll('.philosophy-heading .word-inner');
+  gsap.to(philoWords, {
+    y: 0,
+    stagger: 0.15,
+    duration: 1,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.philosophy',
+      start: 'top 60%',
+      end: 'top 20%',
+      scrub: 1
+    }
+  });
+
+  gsap.to('.philosophy-desc', {
+    opacity: 1,
+    y: 0,
+    scrollTrigger: {
+      trigger: '.philosophy-desc',
+      start: 'top 80%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+  gsap.set('.philosophy-desc', { opacity: 0, y: 30 });
+
+  // Philosophy image parallax
+  gsap.to('.philosophy-image img', {
+    scale: 1,
+    y: -50,
+    scrollTrigger: {
+      trigger: '.philosophy',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1
+    }
+  });
+
+  // ===== PRODUCTS: Horizontal Scroll =====
+  const track = document.getElementById('products-track');
+  const trackWidth = track.scrollWidth - window.innerWidth;
+
+  gsap.to(track, {
+    x: () => -trackWidth,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.products',
+      start: 'top top',
+      end: () => '+=' + trackWidth * 1.2,
+      scrub: 1,
+      pin: true,
+      anticipatePin: 1,
+      invalidateOnRefresh: true
+    }
+  });
+
+  // ===== COLLECTION: Image Reveal =====
+  document.querySelectorAll('.collection-item').forEach((item, i) => {
+    gsap.to(item.querySelector('.reveal-mask'), {
+      scaleX: 0,
+      duration: 1.2,
+      ease: 'power3.inOut',
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 75%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    gsap.to(item.querySelector('img'), {
+      scale: 1,
+      duration: 1.5,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 75%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
+
+  // ===== VALUES: Big Text =====
+  const valWords = document.querySelectorAll('.val-word');
+  gsap.to(valWords, {
+    opacity: 1,
+    y: 0,
+    stagger: 0.1,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.values-big',
+      start: 'top 75%',
+      end: 'top 30%',
+      scrub: 1
+    }
+  });
+
+  // Values grid items
+  document.querySelectorAll('.value-item').forEach((item, i) => {
+    gsap.to(item, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      delay: i * 0.15,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.values-grid',
+        start: 'top 75%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
+
+  // ===== FOOTER: Brand reveal =====
+  gsap.from('.footer-brand', {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: 'footer',
+      start: 'top 80%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+
+  // Refresh ScrollTrigger on resize
+  window.addEventListener('resize', () => {
+    ScrollTrigger.refresh();
+  });
+}
+</script>
+</body>
+</html>
